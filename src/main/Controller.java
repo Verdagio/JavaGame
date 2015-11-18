@@ -38,6 +38,7 @@ public class Controller extends KeyAdapter {
 		if(key == KeyEvent.VK_ESCAPE){
 			System.exit(1);
 		}
+
 	}//key pressed
 	
 	/* The below method will handle release events

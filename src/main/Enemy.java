@@ -43,8 +43,7 @@ public void render(Graphics g) {
 	g2.setColor(Color.RED);
 	g2.draw(getBounds());
 	
-	//g.setColor(Color.CYAN);
-	//g.fillRect(5, 5, 32, 32);
+	g.fillRect(x, y, 16, 16);
 }// render
 
 

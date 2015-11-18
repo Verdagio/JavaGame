@@ -29,27 +29,30 @@ public class Game extends Canvas implements Runnable{
 
 	public enum STATE{
 		Menu,
-		Game;
+		Game,
 	};
-	public STATE gameState = STATE.Menu;
+	public STATE gameState = STATE.Game;
 	
 	
 	public Game(){																			//Game Method
-		handler = new Handler();															//Create a new Handler
+		handler = new Handler();																//Create a new Handler
 		
-		new Window(WIDTH, HEIGHT, "Daniel Verdejo - First Java Game", this);				//Create a new window in which the game will be displayed.	
-		hud = new Hud();																	//create a new HUD object
+		this.addKeyListener(new Controller(handler));											// This will listen for keyEvents from the Controller
+		this.addMouseListener(menu);															// This will add the mouse listener
+		new Window(WIDTH, HEIGHT, "Daniel Verdejo - First Java Game", this);					//Create a new window in which the game will be displayed.	
+		hud = new Hud();																		//create a new HUD object
 		spawn = new Spawn(handler, hud);
-		r = new Random();																	//Generate a random number 
-		menu = new Menu();
-		long wait = 200, wait2 = 500;														//Instantiate some variable
+	
+		r = new Random();																		//Generate a random number 
+		long wait = 200, wait2 = 500;															//Instantiate some variable
 		int noOfEnemies = 0;
 		
-		if(gameState == STATE.Game){
+
+		
+		if(gameState == STATE.Game){															//If games state == game
 			
 			handler.addObject(new Player(50,250,Identity.Player,handler));						//This will add an object of type Player.
 			
-			this.addKeyListener(new Controller(handler));										// This will listen for keyEvents from the Controller 
 			
 			for(int i = 0;	i <= 1000;	i++){													//Begin a loop 
 				switch(hud.getWave()){															//using a switch we will dictate how many enemies, and the wait
@@ -83,27 +86,30 @@ public class Game extends Canvas implements Runnable{
 					noOfEnemies = 27;
 					break;
 				case 10:
-					noOfEnemies = 30;
+					noOfEnemies = 6;
 					wait = 100;
 					wait2 = 425;
 					break;
 				case 11:
-					noOfEnemies = 40;
+					noOfEnemies = 9;
 					wait = 75;
 					wait2 = 400;
 					break;
 				case 12:
-					noOfEnemies = 50;
+					noOfEnemies = 12;
 					wait = 65;
 					wait2 = 375;
 					break;
 				case 13:
-					noOfEnemies = 60;
+					noOfEnemies = 15;
 					wait2 = 325;
 					break;
 				case 14:
-					noOfEnemies = 100;
+					noOfEnemies = 18;
 					wait2 = 250;
+					break;
+				case 15:
+					noOfEnemies = 21;
 					break;
 				}//switch get the wave dictate the number of enemies
 					
@@ -166,7 +172,7 @@ public class Game extends Canvas implements Runnable{
 	            	}//for
 	            }//if
 			}//GameState game
-		}//Outer For loop
+		}//Outer For loop 
 	}//Game 
 	
 	public synchronized void start(){														//Start Method
@@ -235,6 +241,7 @@ public class Game extends Canvas implements Runnable{
 		if(gameState == STATE.Game){
 			hud.tick();
 			spawn.tick();
+			
 		}else if(gameState == STATE.Menu){
 			menu.tick();
 		}

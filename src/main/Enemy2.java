@@ -39,6 +39,8 @@ public void render(Graphics g) {
 	Graphics2D g2 = (Graphics2D) g;
 	
 	g2.draw(getBounds());
+	g2.setColor(Color.YELLOW);
+	g2.fillRect(x, y, 32, 32);
 	
 
 }// render
